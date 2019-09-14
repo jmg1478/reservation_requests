@@ -4,7 +4,7 @@ var express = require("express");
 var path = require('path');
 
 var app = express();
-var PORT = process.env.PORT || 3000;
+var PORT = process.env.PORT || 3012;
 
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
@@ -55,6 +55,22 @@ app.get("/reserve", function(req,res){
 app.get("/api/tables", function(req,res){
     return res.json(reservations);
 })
+
+app.post("/api/people", function(req, res) {
+    var person = req.body;
+  console.log(person.Name);
+  
+    // Using a RegEx Pattern to remove spaces from newCharacter
+    // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
+    var name = person.Name.replace(/\s+/g, "").toLowerCase();
+  console.log(name);
+  
+    // console.log(person);
+  
+    // reservations.push(person);
+  
+    // res.json(person);
+  });
 
 app.listen(PORT, function(){
     console.log("App listening on PORT "+PORT);
